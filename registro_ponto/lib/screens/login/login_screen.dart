@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
               thumbColor: MaterialStateProperty.all(Colors.white),
             ),
           );
+
     return Theme(
       data: themeData,
       child: Scaffold(
@@ -90,9 +91,14 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState!.save();
-                                  print('Usuário: $_username');
+                                if (_username.isEmpty) {
+                                  Navigator.pushNamed(
+                                      context, '/registroPonto');
+                                } else {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    print('Usuário: $_username');
+                                  }
                                 }
                               },
                               child: Text('LOGIN'),
