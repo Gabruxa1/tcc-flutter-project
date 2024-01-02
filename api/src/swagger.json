@@ -1,0 +1,135 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "API de Manipulação de Usuários e Pontos",
+		"description": "Essa API tem como finalidade manipular os dados referentes a usuários e registros de pontos",
+		"contact": {
+			"email": "gabriel.harik@gmail.com"
+		},
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:433",
+			"description": "API de testes"
+		}
+	],
+	"paths": {
+		"/funcionarios": {
+			"post": {
+				"summary": "Cadastro de novo funcionário",
+				"description": "Essa rota será responsável por cadastrar um novo funcionário",
+				"tags": [
+					"Funcionários"
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/employee"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/response_employee"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/response_bad_request"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"get": {
+				"summary": "Obter funcionários cadastrados",
+				"description": "Essa rota será responsável por retornar todos os funcionários cadastrados",
+				"tags": [
+					"Funcionários"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/employee"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"employee": {
+				"type": "object",
+				"properties": {
+					"nome": {
+						"type": "string"
+					},
+					"cpf": {
+						"type": "string"
+					},
+					"telefone": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"senha": {
+						"type": "string"
+					},
+					"funcao": {
+						"type": "string"
+					},
+					"admin": {
+						"type": "boolean"
+					},
+					"ativo": {
+						"type": "boolean"
+					},
+					"custo_hora": {
+						"type": "number",
+						"format": "float"
+					}
+				}
+			},
+			"response_employee": {
+				"type": "object",
+				"properties": {
+					"id_pessoa": {
+						"type": "string"
+					}
+				}
+			},
+			"response_bad_request": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
